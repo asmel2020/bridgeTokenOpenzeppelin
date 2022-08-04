@@ -6,6 +6,7 @@ const IndexPage = () => {
 
   const [disabled, setDisabled] = useState();
   const [toNetwork, setToNetwork] = useState("AVAX");
+  const [amount, setAmount] = useState(0);
 
   // pide conectar una address de Metamask
   async function requestAccount() {
@@ -49,7 +50,7 @@ const IndexPage = () => {
             <label>to:</label>
             <p>{toNetwork}</p>
           </form>
-          <input disabled={!disabled} min="0" type="number" placeholder="Amount" />
+          <input disabled={!disabled} min="0" type="number" placeholder="Amount" onChange={(e) => setAmount(e.target.value)} />
           <button disabled={!disabled} type="submit">Call Contract</button>
         </div>
       </div>
