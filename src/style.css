@@ -52,7 +52,7 @@ body {
   margin-top: 30px;
 }
 
-label, input, button {
+label, input, button, select {
   display: block;
   width: 100%;
   padding: 0;
@@ -63,6 +63,30 @@ label, input, button {
 
 input::placeholder {
   color: gray;
+}
+
+label {
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+p, select {
+  height: 30px;
+  text-align: center;
+  font-size: 14px;
+  border-radius: 50px;
+}
+
+p {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0;
+}
+
+select {
+  padding-left: 10px;
 }
 
 input {
