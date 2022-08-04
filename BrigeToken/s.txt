@@ -1,0 +1,12 @@
+custodialAddressBlockchain_1
+custodialAddressBlockchain_2
+apiKeyBlockchain_1,
+apiSecretBlockchain_1,
+apiKeyBlockchain_2,
+apiSecretBlockchain_2,
+PauseAutoTaskId_1,
+PauseAutoTaskId_2,
+adminApiKey,
+adminApiSecret,
+originalTokenAddress,
+WrapeTokenAddress
