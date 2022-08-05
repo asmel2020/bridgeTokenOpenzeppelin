@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ethers, BigNumber } from "ethers";
+import { ethers} from "ethers";
 import detectEthereumProvider from "@metamask/detect-provider";
 // import { ethers } from "ethers";
 import "../style.css";
