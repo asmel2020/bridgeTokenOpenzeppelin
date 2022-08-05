@@ -2,7 +2,7 @@
 import { OpenzeppelinDefender } from "hardhat";
 
 async function main() {
-  
+
   const params: any = {
     name: "balaceVerify",
     encodedZippedCode:

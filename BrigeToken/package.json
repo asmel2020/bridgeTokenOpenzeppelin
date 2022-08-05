@@ -21,11 +21,11 @@
     "deploy:Token": "yarn hardhat run scripts/deploy/MyToken.ts --network bscTestnet",
     "deploy:WToken": "yarn hardhat run scripts/deploy/WMytoken.ts --network avalancheTestnet",
     "deploy:TokenAll": "yarn deploy:Token && yarn deploy:WToken",
-    "relay:all":"yarn relay:Bsc && yarn relay:Avax",
+    "relay:all": "yarn relay:Bsc && yarn relay:Avax",
     "deploy:brigeAll": "yarn deploy:brigeBsc && yarn deploy:brigeAvax",
     "autoTask:all": "yarn autoTask:brigeOracle && yarn autoTask:balaceVerify & yarn autoTask:pause-custodial-blockchain-1 && yarn autoTask:pause-custodial-blockchain-2 && yarn autoTask:unpause-custodial-blockchain-1 && yarn autoTask:unpause-custodial-blockchain-2",
-    "sentinel:all":"yarn sentinel:sentinelBsc && yarn sentinel:sentinelAvax",
-    "deploy:allSystem":"yarn relay:all && yarn deploy:brigeAll && yarn autoTask:all && yarn sentinel:all"
+    "sentinel:all": "yarn sentinel:sentinelBsc && yarn sentinel:sentinelAvax",
+    "deploy:allSystem": "yarn relay:all && yarn deploy:brigeAll && yarn autoTask:all && yarn sentinel:all"
   },
   "author": "",
   "license": "ISC",

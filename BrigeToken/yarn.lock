@@ -2324,32 +2324,32 @@
     "clone" "^1.0.2"
 
 "defender-admin-client@^1.25.0":
-  "integrity" "sha512-XG8BJssvFmg0w53rXsqfQp2Pz+THPwN4J1oqUiNB8QvWXlTAL75A1xZxImm5DBKmwJ/5jwXEwkGOcaq4DFS2kA=="
-  "resolved" "https://registry.npmjs.org/defender-admin-client/-/defender-admin-client-1.25.0.tgz"
-  "version" "1.25.0"
+  "integrity" "sha512-vupA2rqFUvqfZByY1id0nHZEMKf/m82eTR/dqPPTBJN1QMcU3n/lQqjYp0zOpUTBPXCmfxnKei0S6aZPYDok7w=="
+  "resolved" "https://registry.npmjs.org/defender-admin-client/-/defender-admin-client-1.27.0.tgz"
+  "version" "1.27.0"
   dependencies:
     "axios" "^0.21.2"
-    "defender-base-client" "1.25.0"
+    "defender-base-client" "^1.27.0"
     "lodash" "^4.17.19"
     "node-fetch" "^2.6.0"
 
 "defender-autotask-client@^1.25.0":
-  "integrity" "sha512-/aD0jtduQtRqv0q1X8r0g8/UggSDwiYyGd1w7VqP9y86hINm15NwTNvezr2ZqMDgZerWc+5DAZ44M8trUhHmlA=="
-  "resolved" "https://registry.npmjs.org/defender-autotask-client/-/defender-autotask-client-1.25.0.tgz"
-  "version" "1.25.0"
+  "integrity" "sha512-5JCGj7LkWysuvykSYFQ21GgDlSn6JBD6pyKAJcPy0mjh9ASikIDBVhKTrVtaY09SurKEU7T5ydJt3plraL0JFA=="
+  "resolved" "https://registry.npmjs.org/defender-autotask-client/-/defender-autotask-client-1.27.0.tgz"
+  "version" "1.27.0"
   dependencies:
     "axios" "^0.21.2"
-    "defender-base-client" "1.25.0"
+    "defender-base-client" "^1.27.0"
     "dotenv" "^10.0.0"
     "glob" "^7.1.6"
     "jszip" "^3.5.0"
     "lodash" "^4.17.19"
     "node-fetch" "^2.6.0"
 
-"defender-base-client@^1.23.0", "defender-base-client@1.25.0":
-  "integrity" "sha512-42a9zEnif94mCkM1N19C+6k7R1QUqNq4FIaS/jVQ5kSJaSmv3FTmLT41/6qHXev76VYp87EyKqbDA9biGhgx/Q=="
-  "resolved" "https://registry.npmjs.org/defender-base-client/-/defender-base-client-1.25.0.tgz"
-  "version" "1.25.0"
+"defender-base-client@^1.27.0":
+  "integrity" "sha512-Iq0KEwXK/dSKZ0pDvvxsZ0BKjw5kLoV1fRimBOngcd9E4AJjrwihljPxZbgb1uxcQ3BT4vzfklQnplTW1t9FIw=="
+  "resolved" "https://registry.npmjs.org/defender-base-client/-/defender-base-client-1.27.0.tgz"
+  "version" "1.27.0"
   dependencies:
     "amazon-cognito-identity-js" "^4.3.3"
     "axios" "^0.21.2"
@@ -2357,35 +2357,35 @@
     "node-fetch" "^2.6.0"
 
 "defender-kvstore-client@^1.25.0":
-  "integrity" "sha512-hWgYzFuRJcFGb++22KrnQ4QUHBsC8sYaRwSxJfwxvnhg+q5LIw9HJC4wtJum0SeZv6c4bDzVeHPPo4nr5W1E2Q=="
-  "resolved" "https://registry.npmjs.org/defender-kvstore-client/-/defender-kvstore-client-1.25.0.tgz"
-  "version" "1.25.0"
+  "integrity" "sha512-QS81lqLgAIFEGFgqVswHSZktobN+a/awwOwxNoX0O037KAcFro25aEwHNZy6K4oBAZUleVBhSoa0T7iUjTDcGg=="
+  "resolved" "https://registry.npmjs.org/defender-kvstore-client/-/defender-kvstore-client-1.27.0.tgz"
+  "version" "1.27.0"
   dependencies:
     "axios" "^0.21.2"
-    "defender-base-client" "1.25.0"
+    "defender-base-client" "^1.27.0"
     "fs-extra" "^10.0.0"
     "lodash" "^4.17.19"
     "node-fetch" "^2.6.0"
 
 "defender-relay-client@^1.26.1":
-  "integrity" "sha512-EoVQqrPS5PlCjCfZPV2wG9TBBezImYD5tf4DV3dbbXaxdTlD6bTcd3AFj4GLZss8EjXnCrQc2JAT5BWMLuQ2UQ=="
-  "resolved" "https://registry.npmjs.org/defender-relay-client/-/defender-relay-client-1.26.1.tgz"
-  "version" "1.26.1"
+  "integrity" "sha512-7ix8XdP0trg7SipbUFSD6PPGR0ka/jWchSIqK69smMfIVvQ28B+WHDeHkeRmpLrlsLaAyPApM2QPQGPssrLjqQ=="
+  "resolved" "https://registry.npmjs.org/defender-relay-client/-/defender-relay-client-1.27.0.tgz"
+  "version" "1.27.0"
   dependencies:
     "amazon-cognito-identity-js" "^4.3.3"
     "axios" "^0.21.2"
-    "defender-base-client" "^1.23.0"
+    "defender-base-client" "^1.27.0"
     "lodash" "^4.17.19"
     "node-fetch" "^2.6.0"
 
 "defender-sentinel-client@^1.26.0":
-  "integrity" "sha512-AV5Y9+0eAdtMIl96CslL2h2MFLZCBvAKhbWd6b2eXRW1FqTD2WWjp7pgQLx70QLf5Kd5M7K/2XHqsWSXnWYHOQ=="
-  "resolved" "https://registry.npmjs.org/defender-sentinel-client/-/defender-sentinel-client-1.26.0.tgz"
-  "version" "1.26.0"
+  "integrity" "sha512-WvY7mmi6jSyRBrB2gLxWlsuJ4YezKl7fwjIbNh6pB9Cj4uaV3IunYvS6/ETpXBvRn2+6HJ1ldzE7xLlcU4C2OA=="
+  "resolved" "https://registry.npmjs.org/defender-sentinel-client/-/defender-sentinel-client-1.27.0.tgz"
+  "version" "1.27.0"
   dependencies:
     "@ethersproject/abi" "^5.6.3"
     "axios" "^0.21.2"
-    "defender-base-client" "^1.23.0"
+    "defender-base-client" "^1.27.0"
     "lodash" "^4.17.19"
     "node-fetch" "^2.6.0"
 
