@@ -109,14 +109,13 @@ const IndexPage = () => {
         custodiaOrigina,
         ethers.utils.parseUnits(amount.toString(), "ether")
       );
-      erc20.wait(4);
     } else if (chainId === "0xa869") {
       const erc20 = new ethers.Contract(tokenWrapper, abis, signer);
       await erc20.approve(
         custodiaOrigina,
         ethers.utils.parseUnits(amount.toString(), "ether")
       );
-      erc20.wait(4);
+  
     } else {
       setCustomAlert("flex");
       setAlertMessage("Blockchain no permitida, por favor cambie de red");
