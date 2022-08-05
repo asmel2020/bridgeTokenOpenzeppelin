@@ -38,7 +38,7 @@ const IndexPage = () => {
 
       });
   }
-  
+
   async function detectMetamask() {
     const provider = await detectEthereumProvider();
 
@@ -136,16 +136,16 @@ const IndexPage = () => {
     }
   }
 
-  async function postBrige() {
-   
+  async function postBrige(amount) {
+      console.log(amount)
       if (chainId === "0x61") { // BSC
         const custodia = new ethers.Contract(custodiaOrigina, abis, signer);
-        const result =await custodia.brige('1', ethers.utils.parseUnits('1', "ether"));
+        const result =await custodia.brige('1', ethers.utils.parseUnits(amount, "ether"));
         result.wait(4);
       } else if (chainId === "0xa869") { // FUJI
 
         const custodia = new ethers.Contract(custodiaWrapper, abis, signer);
-        const result = await custodia.brige('1', ethers.utils.parseUnits('1', "ether"));
+        const result = await custodia.brige('1', ethers.utils.parseUnits(amount, "ether"));
         result.wait(4);
       } else {
         setCustomAlert("flex");
@@ -196,10 +196,6 @@ const IndexPage = () => {
       
     }
   }
-
-  useEffect(() => {
-    bottons().then()
-  }, [allowance]);
 
   useEffect(() => {
     if (!chainId) {
@@ -265,9 +261,7 @@ const IndexPage = () => {
             type="number"
             placeholder="Amount"
             onChange={(e) => {
-              
               setAmount(e.target.value)
-              console.log(amount)
             }}
           />
           <p id="balance">Balance: {balance}</p>
