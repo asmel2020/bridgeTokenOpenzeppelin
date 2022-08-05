@@ -13,11 +13,11 @@ const IndexPage = () => {
   const [toNetwork, setToNetwork] = useState("AVAX");
   const [symbol, setSymbol] = useState("");
   const [botton, setBotton] = useState("");
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState();
   const [signer, setSigner] = useState();
   const [chainId, setChainId] = useState();
   const [balance, setBalance] = useState();
-  const [allowance, setAllowance] = useState(false);
+  const [allowance, setAllowance] = useState(true);
   const [tokenOrigina, setTokenOriginal] = useState(
     "0x3Ef32B1E5B8b2fF43DEEec56A05C079DDa239BF9"
   );
@@ -31,6 +31,13 @@ const IndexPage = () => {
     "0xB34502Bb06e8cAd033FADf1bB23baFBEa789D195"
   );
 
+  
+    async function detecteMesage(){
+      window.ethereum.on('message', (s)=>{
+        console.log(s)
+
+      });
+    }
   async function detectMetamask() {
     const provider = await detectEthereumProvider();
 
@@ -72,18 +79,22 @@ const IndexPage = () => {
     }
   }
 
-  async function consultAllowance(signer) {
+  async function consultAllowance(chainId,signer) {
+    
     if (chainId === "0x61") {
+
       const erc20 = new ethers.Contract(tokenOrigina, abis, signer);
       const result = await erc20.allowance(
         custodiaOrigina,
         signer.getAddress()
       );
-      if (result.lt("1000000000000000000")) {
-        setAllowance(false);
-      } else {
+     
+      if (result.lt("1")) {
         setAllowance(true);
+      } else {
+        setAllowance(false);
       }
+
     } else if (chainId === "0xa869") {
       const erc20 = new ethers.Contract(tokenWrapper, abis, signer);
       const result = await erc20.allowance(
@@ -91,29 +102,31 @@ const IndexPage = () => {
         signer.getAddress()
       );
 
-      if (result.lt("1000000000000000000")) {
-        setAllowance(false);
-      } else {
+      if (result.lt("1")) {
         setAllowance(true);
+      } else {
+        setAllowance(false);
       }
+
     } else {
-      setCustomAlert("flex");
-      setAlertMessage("Blockchain no permitida, por favor cambie de red");
+      //setCustomAlert("flex");
+      //setAlertMessage("Blockchain no permitida, por favor cambie de red");
     }
   }
 
   async function approve() {
     if (chainId === "0x61") {
       const erc20 = new ethers.Contract(tokenOrigina, abis, signer);
-      await erc20.approve(
+     const result= await erc20.approve(
         custodiaOrigina,
-        ethers.utils.parseUnits(amount.toString(), "ether")
+        ethers.utils.parseUnits('1000000000000000000000000000000000000', "ether")
       );
+      result.wait(4);
     } else if (chainId === "0xa869") {
       const erc20 = new ethers.Contract(tokenWrapper, abis, signer);
       await erc20.approve(
         custodiaOrigina,
-        ethers.utils.parseUnits(amount.toString(), "ether")
+        ethers.utils.parseUnits('1000000000000000000000000000000000000', "ether")
       );
   
     } else {
@@ -123,30 +136,35 @@ const IndexPage = () => {
   }
 
   async function postBrige() {
-    if (chainId === "0x61") { // BSC
-      const custodia = new ethers.Contract(custodiaOrigina, abis, signer);
-      await custodia.brige(amount, ethers.utils.parseUnits(amount, "ether"));
-    } else if (chainId === "0xa869") { // FUJI
-      const custodia = new ethers.Contract(custodiaWrapper, abis, signer);
-      await custodia.brige(amount, ethers.utils.parseUnits(amount, "ether"));
-    } else {
-      setCustomAlert("flex");
-      setAlertMessage("Blockchain no permitida, por favor cambie de red");
-    }
+   
+      if (chainId === "0x61") { // BSC
+        const custodia = new ethers.Contract(custodiaOrigina, abis, signer);
+        const result =await custodia.brige('1', ethers.utils.parseUnits('1', "ether"));
+        result.wait(4);
+      } else if (chainId === "0xa869") { // FUJI
+
+        const custodia = new ethers.Contract(custodiaWrapper, abis, signer);
+        const result = await custodia.brige('1', ethers.utils.parseUnits('1', "ether"));
+        result.wait(4);
+      } else {
+        setCustomAlert("flex");
+        setAlertMessage("Blockchain no permitida, por favor cambie de red");
+      }
+    
+   
   }
 
   async function requestAccount() {
     const provider = new ethers.providers.Web3Provider(await detectMetamask());
 
     await detectChainId();
-
+    await detecteMesage()
     await provider.send("eth_requestAccounts", []);
-
-    setChainId(await provider.send("eth_chainId"));
-
+    const result=await provider.send("eth_chainId")
+    setChainId(result);
     const signer = provider.getSigner();
-
     setSigner(signer);
+    await consultAllowance(result,signer)
   }
 
   async function bottons() {
@@ -174,8 +192,13 @@ const IndexPage = () => {
           Approve
         </button>
       );
+      
     }
   }
+
+  useEffect(() => {
+    bottons().then()
+  }, [allowance]);
 
   useEffect(() => {
     if (!chainId) {
@@ -185,7 +208,6 @@ const IndexPage = () => {
           setBalance(e);
         })
         .catch();
-      consultAllowance(signer).then();
       bottons().then();
     }
   }, [chainId]);
@@ -242,22 +264,13 @@ const IndexPage = () => {
             type="number"
             placeholder="Amount"
             onChange={(e) => {
+              
               setAmount(e.target.value)
               console.log(amount)
             }}
           />
-          <p id="balance">Balance: {balance} {symbol} </p>
+          <p id="balance">Balance: {balance}</p>
           {botton}
-           {/* <button
-          disabled={!disabled}
-          type="submit"
-          onClick={() => {
-            postBrige();
-          }}
-        >
-          Call Contract
-        </button> */}
-      
         </div>
       </div>
       <div id="alert_container" style={{"display": `${customAlert}`}}>
