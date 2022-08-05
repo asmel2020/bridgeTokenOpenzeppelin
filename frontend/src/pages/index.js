@@ -7,7 +7,11 @@ import abis from "../abi/abi";
 
 const IndexPage = () => {
   const [disabled, setDisabled] = useState();
+  const [alertMessage, setAlertMessage] = useState("Alerta, mensaje de prueba");
+  const [customAlert, setCustomAlert] = useState("none");
+  const [fromNetwork, setFromNetwork] = useState("BSC");
   const [toNetwork, setToNetwork] = useState("AVAX");
+  const [symbol, setSymbol] = useState("");
   const [botton, setBotton] = useState("");
   const [amount, setAmount] = useState(0);
   const [signer, setSigner] = useState();
@@ -33,7 +37,8 @@ const IndexPage = () => {
     if (provider) {
       return provider;
     } else {
-      alert("Please install MetaMask!");
+      setCustomAlert("flex");
+      setAlertMessage("Please install MetaMask!")
     }
   }
 
@@ -48,10 +53,16 @@ const IndexPage = () => {
   async function consultBalance(signer) {
     if (chainId === "0x61") {
       const erc20 = new ethers.Contract(tokenOrigina, abis, signer);
+      setSymbol("tBNB");
+      setFromNetwork("BSC");
+      setToNetwork("AVAX")
       return ethers.utils.formatEther(
         await erc20.balanceOf(signer.getAddress())
       );
     } else if (chainId === "0xa869") {
+      setSymbol("AVAX");
+      setFromNetwork("AVAX");
+      setToNetwork("BSC")
       const erc20 = new ethers.Contract(tokenWrapper, abis, signer);
       return ethers.utils.formatEther(
         await erc20.balanceOf(signer.getAddress())
@@ -86,7 +97,8 @@ const IndexPage = () => {
         setAllowance(true);
       }
     } else {
-      alert("blockchain no permitida por favor cambie de red");
+      setCustomAlert("flex");
+      setAlertMessage("Blockchain no permitida, por favor cambie de red");
     }
   }
 
@@ -95,30 +107,32 @@ const IndexPage = () => {
       const erc20 = new ethers.Contract(tokenOrigina, abis, signer);
       await erc20.approve(
         custodiaOrigina,
-        ethers.utils.parseUnits("1000000000000000000000000", "ether")
+        ethers.utils.parseUnits(amount.toString(), "ether")
       );
       erc20.wait(4);
     } else if (chainId === "0xa869") {
       const erc20 = new ethers.Contract(tokenWrapper, abis, signer);
       await erc20.approve(
         custodiaOrigina,
-        ethers.utils.parseUnits("1000000000000000000000000", "ether")
+        ethers.utils.parseUnits(amount.toString(), "ether")
       );
       erc20.wait(4);
     } else {
-      alert("blockchain no permitida por favor cambie de red");
+      setCustomAlert("flex");
+      setAlertMessage("Blockchain no permitida, por favor cambie de red");
     }
   }
 
-  async function postBrige(amount) {
-    if (chainId === "0x61") {
+  async function postBrige() {
+    if (chainId === "0x61") { // BSC
       const custodia = new ethers.Contract(custodiaOrigina, abis, signer);
-      await custodia.brige("1", ethers.utils.parseUnits(amount, "ether"));
-    } else if (chainId === "0xa869") {
+      await custodia.brige(amount, ethers.utils.parseUnits(amount, "ether"));
+    } else if (chainId === "0xa869") { // FUJI
       const custodia = new ethers.Contract(custodiaWrapper, abis, signer);
-      await custodia.brige("1", ethers.utils.parseUnits("1000", "ether"));
+      await custodia.brige(amount, ethers.utils.parseUnits(amount, "ether"));
     } else {
-      alert("blockchain no permitida por favor cambie de red");
+      setCustomAlert("flex");
+      setAlertMessage("Blockchain no permitida, por favor cambie de red");
     }
   }
 
@@ -137,7 +151,6 @@ const IndexPage = () => {
   }
 
   async function bottons() {
-
     if (allowance) {
       setBotton(
         <button
@@ -156,10 +169,10 @@ const IndexPage = () => {
           disabled={!disabled}
           type="submit"
           onClick={() => {
-            postBrige(amount);
+            approve();
           }}
         >
-          Approval
+          Approve
         </button>
       );
     }
@@ -193,18 +206,19 @@ const IndexPage = () => {
       }
       checkActive().catch((err) => console.error(err));
     }
+    detectMetamask();
   }, []);
 
-  const handleOptionChange = (event) => {
-    event.target.value === "BSC" ? setToNetwork("AVAX") : setToNetwork("BSC");
-  };
+  const dismissAlert = ()=> {
+    setCustomAlert("none");
+  }
 
   return (
     <main>
       <div className="container">
         <div className="brand-logo"></div>
         <div className="brand-title">
-          Blockdemy Token Bridge / balance :{balance}
+          Blockdemy Token Bridge
         </div>
         <div className="inputs">
           <button
@@ -219,10 +233,7 @@ const IndexPage = () => {
           </button>
           <form>
             <label name="networksForm">from:</label>
-            <select onChange={(event) => handleOptionChange(event)}>
-              <option value="BSC">BSC</option>
-              <option value="AVAX">AVAX</option>
-            </select>
+            <p>{fromNetwork}</p>
             <label>to:</label>
             <p>{toNetwork}</p>
           </form>
@@ -231,18 +242,29 @@ const IndexPage = () => {
             min="0"
             type="number"
             placeholder="Amount"
-            onChange={(e) => setAmount(e.target.value)}
+            onChange={(e) => {
+              setAmount(e.target.value)
+              console.log(amount)
+            }}
           />
-           <button
+          <p id="balance">Balance: {balance} {symbol} </p>
+          {botton}
+           {/* <button
           disabled={!disabled}
           type="submit"
           onClick={() => {
-            postBrige(amount);
+            postBrige();
           }}
         >
           Call Contract
-        </button>
+        </button> */}
       
+        </div>
+      </div>
+      <div id="alert_container" style={{"display": `${customAlert}`}}>
+        <div id="alert">
+          <p id="alert_text">{alertMessage}</p>
+          <button id="alert_button" onClick={() => dismissAlert()}>OK</button>
         </div>
       </div>
     </main>
