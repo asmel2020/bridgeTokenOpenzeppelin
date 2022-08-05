@@ -3,17 +3,13 @@ const ethers = require("ethers");
 const abi = ['function unpause()'];
 
 exports.handler = async function (event) {
-  const {
-    custodialAddressBlockchain_1,
-    apiKeyBlockchain_1,
-    apiSecretBlockchain_1,
-  } = event.secrets;
-
+  const store = new KeyValueStoreClient(event);
+  
   try {
 
     const credentialsOrigen = {
-      apiKey: apiKeyBlockchain_1,
-      apiSecret: apiSecretBlockchain_1,
+      apiKey: await store.get("apiKeyBlockchain_1"),
+      apiSecret: await store.get("apiSecretBlockchain_1"),
     };
 
     const providerOrigen = new DefenderRelayProvider(credentialsOrigen);
@@ -21,7 +17,7 @@ exports.handler = async function (event) {
         speed: "fast",
       });
     const OrigenCustodial = new ethers.Contract(
-      custodialAddressBlockchain_1,
+      await store.get("custodialAddressBlockchain_1"),
       abi,
       OrigenSigner
     );

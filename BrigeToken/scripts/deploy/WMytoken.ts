@@ -3,10 +3,13 @@ import { ethers, OpenzeppelinDefender } from "hardhat";
 import * as fs from "fs";
 async function main() {
   // We get the contract to deploy
+  
+  const relayAddress =
+  (await OpenzeppelinDefender.KvstoreClient.get("walletAddress")) || " ";
 
   const WMyToken = await ethers.getContractFactory("WMyToken");
 
-  const wMyToken = await WMyToken.deploy();
+  const wMyToken = await WMyToken.deploy(relayAddress);
 
   const {chainId} =await wMyToken.provider.getNetwork();
 

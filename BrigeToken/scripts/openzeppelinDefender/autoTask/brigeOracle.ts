@@ -12,7 +12,7 @@ async function main() {
     trigger: {
       type: "webhook",
     },
-    paused: false,
+    paused: true,
   };
 
   const result = await OpenzeppelinDefender.AutoTaskClint.create(params);

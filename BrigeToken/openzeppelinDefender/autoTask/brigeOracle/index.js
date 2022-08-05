@@ -69,27 +69,20 @@ const transactionBrigs = async ({ hash, credentials, custodialAddress }) => {
 };
 
 exports.handler = async function (event) {
-  const {
-    custodialAddressBlockchain_1,
-    apiKeyBlockchain_1,
-    apiSecretBlockchain_1,
-    custodialAddressBlockchain_2,
-    apiKeyBlockchain_2,
-    apiSecretBlockchain_2,
-  } = event.secrets;
-
+  const store = new KeyValueStoreClient(event);
+  
   const { hash, sentinel } = event.request.body;
 
   if (sentinel.chainId === 97) {
     const params = {
       credentials: {
-        originalApiKey: apiKeyBlockchain_1,
-        originalApiSecret: apiSecretBlockchain_1,
-        WrapperApiKey: apiKeyBlockchain_2,
-        WrapperApiSecret: apiSecretBlockchain_2,
+        originalApiKey: await store.get("apiKeyBlockchain_1"),
+        originalApiSecret: await store.get("apiSecretBlockchain_1"),
+        WrapperApiKey: await store.get("apiKeyBlockchain_2"),
+        WrapperApiSecret: await store.get("apiSecretBlockchain_2"),
       },
       hash,
-      custodialAddress: custodialAddressBlockchain_2,
+      custodialAddress: await store.get("custodialAddressBlockchain_2"),
     };
 
     const result = await transactionBrigs(params);
@@ -98,13 +91,13 @@ exports.handler = async function (event) {
   } else if (sentinel.chainId === 43113) {
     const params = {
       credentials: {
-        originalApiKey: apiKeyBlockchain_2,
-        originalApiSecret: apiSecretBlockchain_2,
-        WrapperApiKey: apiKeyBlockchain_1,
-        WrapperApiSecret: apiSecretBlockchain_1,
+        originalApiKey: await store.get("apiKeyBlockchain_2"),
+        originalApiSecret: await store.get("apiSecretBlockchain_2"),
+        WrapperApiKey: await store.get("apiKeyBlockchain_1"),
+        WrapperApiSecret: await store.get("apiSecretBlockchain_1"),
       },
       hash,
-      custodialAddress: custodialAddressBlockchain_1,
+      custodialAddress: await store.get("custodialAddressBlockchain_1"),
     };
 
     const result = await transactionBrigs(params);

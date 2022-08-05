@@ -3,16 +3,12 @@ const ethers = require("ethers");
 const abi = ['function unpause()'];
 
 exports.handler = async function (event) {
-  const {
-    custodialAddressBlockchain_2,
-    apiKeyBlockchain_2,
-    apiSecretBlockchain_2,
-  } = event.secrets;
-
+  const store = new KeyValueStoreClient(event);
+ 
   try {
     const credentialsWrapper = {
-      apiKey: apiKeyBlockchain_2,
-      apiSecret: apiSecretBlockchain_2,
+      apiKey: await store.get("apiKeyBlockchain_2"),
+      apiSecret: await store.get("apiSecretBlockchain_2"),
     };
 
     const providerWrapper = new DefenderRelayProvider(credentialsWrapper);
@@ -20,7 +16,7 @@ exports.handler = async function (event) {
         speed: "fast",
       });
     const WrapperCustodial = new ethers.Contract(
-      custodialAddressBlockchain_2,
+      await store.get("custodialAddressBlockchain_2"),
       abi,
       WrapperSigner
     );

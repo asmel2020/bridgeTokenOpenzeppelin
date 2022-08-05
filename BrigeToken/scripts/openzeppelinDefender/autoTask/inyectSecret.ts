@@ -2,21 +2,21 @@
 import { OpenzeppelinDefender } from "hardhat";
 
 async function main() {
-
+  
   const params: any = {
-    name: "balaceVerify",
+    name: "inyectSecret",
     encodedZippedCode:
       await OpenzeppelinDefender.AutoTaskClint.getEncodedZippedCodeFromFolder(
-        "./openzeppelinDefender/autoTask/balaceVerify"
+        "./openzeppelinDefender/autoTask/inyectSecret"
       ),
     trigger: {
-      type: 'schedule',
-      frequencyMinutes: 30
+      type: "webhook",
     },
     paused: false,
   };
 
-  await OpenzeppelinDefender.AutoTaskClint.create(params);
+  const result = await OpenzeppelinDefender.AutoTaskClint.create(params);
+  await OpenzeppelinDefender.KvstoreClient.put('inyectSecretAutotaskId',result.autotaskId)
 }
 
 main();

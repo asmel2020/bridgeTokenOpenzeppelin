@@ -10,11 +10,9 @@ describe("Lock", function () {
     describe("Transfers", function () {
       it("Should transfer the funds to the owner", async function () {
        //const inf = new ethers.utils.Interface(fs.readFileSync("./abis/BrigeToken.json", { encoding: "utf8", flag: "r" }).toString())
-
-      console.log(await OpenzeppelinDefender.AutoTaskClint.list())
-       //OpenzeppelinDefender.AutoTaskClint.runAutotask()
-     
-      }).timer(600000);
+      const data=await OpenzeppelinDefender.AutoTaskClint.list()
+      console.log(data)
+      });
     });
 
 

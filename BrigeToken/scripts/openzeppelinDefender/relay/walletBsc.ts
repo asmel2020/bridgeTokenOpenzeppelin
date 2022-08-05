@@ -12,8 +12,8 @@ async function main() {
   const RelayerGetResponse = await OpenzeppelinDefender.RelayClient.create(
     requestParameters
   );
-
-  const { apiKey, secretKey, relayerId, keyId }:any =
+console.log(RelayerGetResponse)
+  /*const { apiKey, secretKey, relayerId, keyId }:any =
     await OpenzeppelinDefender.RelayClient.createKey(
       RelayerGetResponse.relayerId
   );
@@ -30,7 +30,7 @@ async function main() {
   await OpenzeppelinDefender.KvstoreClient.put('credencialRelay',JSON.stringify(cr))
   await OpenzeppelinDefender.KvstoreClient.put('walletAddress',RelayerGetResponse.address)
   await OpenzeppelinDefender.KvstoreClient.put('apiKeyBlockchain_1',apiKey)
-  await OpenzeppelinDefender.KvstoreClient.put('apiSecretBlockchain_1',secretKey)
+  await OpenzeppelinDefender.KvstoreClient.put('apiSecretBlockchain_1',secretKey)*/
 }
 
 main();
