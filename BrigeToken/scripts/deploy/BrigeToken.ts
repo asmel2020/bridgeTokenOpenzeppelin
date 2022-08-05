@@ -25,16 +25,14 @@ async function main() {
         .readFileSync("./abis/BrigeToken.json", { encoding: "utf8", flag: "r" })
         .toString(),
     };
-    const { address, network } =
-      await OpenzeppelinDefender.AdminClient.addContract(params);
+    const { address,network } = await OpenzeppelinDefender.AdminClient.addContract(params);
     await OpenzeppelinDefender.KvstoreClient.put(
       name,
       JSON.stringify({ name, address, network })
     );
-    await OpenzeppelinDefender.KvstoreClient.put(
-      "custodialAddressBlockchain_1",
-      address
-    );
+
+    await OpenzeppelinDefender.KvstoreClient.put("custodialAddressBlockchain_1",address);
+
   } else {
     name = "BrigeTokenAvax";
     params = {
@@ -56,7 +54,7 @@ async function main() {
     
     await OpenzeppelinDefender.KvstoreClient.put(
       "custodialAddressBlockchain_2",
-      address
+      brigeToken.address
     );
   }
 }

@@ -15,9 +15,9 @@ async function main() {
     paused: false,
   };
 
-  const result = await OpenzeppelinDefender.AutoTaskClint.create(params);
+  const {autotaskId}= await OpenzeppelinDefender.AutoTaskClint.create(params);
 
-  await OpenzeppelinDefender.KvstoreClient.put('PauseAutoTaskId_1',result.autotaskId)
+  await OpenzeppelinDefender.KvstoreClient.put('PauseAutoTaskId_1',autotaskId)
 }
 
 main();

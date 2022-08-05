@@ -12,12 +12,12 @@ async function main() {
     trigger: {
       type: "webhook",
     },
-    paused: true,
+    paused: false,
   };
 
-  const result = await OpenzeppelinDefender.AutoTaskClint.create(params);
+  const {autotaskId} = await OpenzeppelinDefender.AutoTaskClint.create(params);
   
-  await OpenzeppelinDefender.KvstoreClient.put('brigeOracleAutotaskId',result.autotaskId)
+  await OpenzeppelinDefender.KvstoreClient.put('brigeOracleAutotaskId',autotaskId)
 }
 
 main();

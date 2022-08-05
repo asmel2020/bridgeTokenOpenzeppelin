@@ -2258,23 +2258,23 @@ defaults@^1.0.3:
   dependencies:
     clone "^1.0.2"
 
-defender-admin-client@^1.27.0:
-  version "1.27.0"
-  resolved "https://registry.yarnpkg.com/defender-admin-client/-/defender-admin-client-1.27.0.tgz#a084eebc34f48babd5bc388e6e124d4330b9d432"
-  integrity sha512-vupA2rqFUvqfZByY1id0nHZEMKf/m82eTR/dqPPTBJN1QMcU3n/lQqjYp0zOpUTBPXCmfxnKei0S6aZPYDok7w==
+defender-admin-client@^1.27.1:
+  version "1.27.1"
+  resolved "https://registry.yarnpkg.com/defender-admin-client/-/defender-admin-client-1.27.1.tgz#d6eec425b2272546d4826778ec6e0147bb5e9e2a"
+  integrity sha512-uhZNu8XrY3L/vPgY6pET+AhfruuDnJcYxhJXCe9ByEFjllTOcSmp7ZZTwZp520hhQri8KamtySyHmeciaILygg==
   dependencies:
     axios "^0.21.2"
-    defender-base-client "^1.27.0"
+    defender-base-client "1.27.1"
     lodash "^4.17.19"
     node-fetch "^2.6.0"
 
-defender-autotask-client@^1.27.0:
-  version "1.27.0"
-  resolved "https://registry.yarnpkg.com/defender-autotask-client/-/defender-autotask-client-1.27.0.tgz#29c0e9fca1d0a137070d14aba0589134df12bbe7"
-  integrity sha512-5JCGj7LkWysuvykSYFQ21GgDlSn6JBD6pyKAJcPy0mjh9ASikIDBVhKTrVtaY09SurKEU7T5ydJt3plraL0JFA==
+defender-autotask-client@^1.27.1:
+  version "1.27.1"
+  resolved "https://registry.yarnpkg.com/defender-autotask-client/-/defender-autotask-client-1.27.1.tgz#0353fb08137df27b822713d86e77671851dbfa39"
+  integrity sha512-xeAhggxl2kKOMTlsiLPsIYc88980b13D1J1yJ34rPPsywKaHgCUNC6bEtgvbBoykIPDvsscBLt3jIjB2cJhSog==
   dependencies:
     axios "^0.21.2"
-    defender-base-client "^1.27.0"
+    defender-base-client "1.27.1"
     dotenv "^10.0.0"
     glob "^7.1.6"
     jszip "^3.5.0"
@@ -2286,46 +2286,46 @@ defender-autotask-utils@^1.25.0:
   resolved "https://registry.yarnpkg.com/defender-autotask-utils/-/defender-autotask-utils-1.25.0.tgz#f4aa795d4fed9af28fe8d250657b848c3248026b"
   integrity sha512-NeZ2DVL7SOnkG3xWx6vKUi/q97IFcGXDsKL5tyUzcxsHNuI0iGFvSZd15i6zD1f93hSKHzOxmPOuJpZKdRHv5Q==
 
-defender-base-client@^1.27.0:
-  version "1.27.0"
-  resolved "https://registry.npmjs.org/defender-base-client/-/defender-base-client-1.27.0.tgz"
-  integrity sha512-Iq0KEwXK/dSKZ0pDvvxsZ0BKjw5kLoV1fRimBOngcd9E4AJjrwihljPxZbgb1uxcQ3BT4vzfklQnplTW1t9FIw==
+defender-base-client@1.27.1:
+  version "1.27.1"
+  resolved "https://registry.yarnpkg.com/defender-base-client/-/defender-base-client-1.27.1.tgz#4376a5046a0546d58c2b8f3c661e2dec1fdfa87c"
+  integrity sha512-/EyzoNyEGXeD1yeudxfSTQvdM2JiFguS8COWkNDYAsIbrvRd+J8JWwkjAd2/dckrWohK3ycvay1fvWeQj0Dmhw==
   dependencies:
     amazon-cognito-identity-js "^4.3.3"
     axios "^0.21.2"
     lodash "^4.17.19"
     node-fetch "^2.6.0"
 
-defender-kvstore-client@^1.27.0:
-  version "1.27.0"
-  resolved "https://registry.yarnpkg.com/defender-kvstore-client/-/defender-kvstore-client-1.27.0.tgz#8a819df75cbb32c1191191b57e03b28aa1ca82ee"
-  integrity sha512-QS81lqLgAIFEGFgqVswHSZktobN+a/awwOwxNoX0O037KAcFro25aEwHNZy6K4oBAZUleVBhSoa0T7iUjTDcGg==
+defender-kvstore-client@^1.27.1:
+  version "1.27.1"
+  resolved "https://registry.yarnpkg.com/defender-kvstore-client/-/defender-kvstore-client-1.27.1.tgz#c0ef09d102e3a346072a6d470cca835f3001aad5"
+  integrity sha512-LSLwh1AFUhdwgYdADMIfI6aX2MEWjDqBpC/aw8IySrP6tnxh8EgPAmn5LBfAM/Rekm6skOhKSSX6yhH5FFJ5sA==
   dependencies:
     axios "^0.21.2"
-    defender-base-client "^1.27.0"
+    defender-base-client "1.27.1"
     fs-extra "^10.0.0"
     lodash "^4.17.19"
     node-fetch "^2.6.0"
 
-defender-relay-client@^1.27.0:
-  version "1.27.0"
-  resolved "https://registry.yarnpkg.com/defender-relay-client/-/defender-relay-client-1.27.0.tgz#266a917c82b9bc3b3371faf8afecc835c70fa117"
-  integrity sha512-7ix8XdP0trg7SipbUFSD6PPGR0ka/jWchSIqK69smMfIVvQ28B+WHDeHkeRmpLrlsLaAyPApM2QPQGPssrLjqQ==
+defender-relay-client@^1.27.1:
+  version "1.27.1"
+  resolved "https://registry.yarnpkg.com/defender-relay-client/-/defender-relay-client-1.27.1.tgz#89fa5fd4ca596f20cab0d4cae03db763a410aeb6"
+  integrity sha512-veTb5Ra88VOgsXho+90wULLHcqJggI1BB0K92oBiEFE0sPyAkFjSOUuqbypOwIxsNs0Iv9UxcY5LeJQAU6WbDg==
   dependencies:
     amazon-cognito-identity-js "^4.3.3"
     axios "^0.21.2"
-    defender-base-client "^1.27.0"
+    defender-base-client "1.27.1"
     lodash "^4.17.19"
     node-fetch "^2.6.0"
 
-defender-sentinel-client@^1.27.0:
-  version "1.27.0"
-  resolved "https://registry.yarnpkg.com/defender-sentinel-client/-/defender-sentinel-client-1.27.0.tgz#7f9b554e8406b58122afb2cdb51680e3e72a846b"
-  integrity sha512-WvY7mmi6jSyRBrB2gLxWlsuJ4YezKl7fwjIbNh6pB9Cj4uaV3IunYvS6/ETpXBvRn2+6HJ1ldzE7xLlcU4C2OA==
+defender-sentinel-client@^1.27.1:
+  version "1.27.1"
+  resolved "https://registry.yarnpkg.com/defender-sentinel-client/-/defender-sentinel-client-1.27.1.tgz#e3846c9d80415b7e88aea41853c49b749bc65527"
+  integrity sha512-CwCWR43mdJHrlwIXm3A37XJZYqg4GpJwe1e78HfqPp7wGGc8sIduinOOy17OHFMxBZbP7SoVD8vlLZ/aPX/rkw==
   dependencies:
     "@ethersproject/abi" "^5.6.3"
     axios "^0.21.2"
-    defender-base-client "^1.27.0"
+    defender-base-client "1.27.1"
     lodash "^4.17.19"
     node-fetch "^2.6.0"
 
@@ -3489,17 +3489,17 @@ hardhat-gas-reporter@^1.0.8:
     eth-gas-reporter "^0.2.24"
     sha1 "^1.1.1"
 
-hardhat-openzeppelin-defender@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/hardhat-openzeppelin-defender/-/hardhat-openzeppelin-defender-1.0.6.tgz#fa14bd163e06bc155e2d5fe854c7e02e5c022bee"
-  integrity sha512-nArq93BzGWs+r/MWyRUUNTEODpHjK6diAB9IWF592HID5q/55IJUnbk4/ANnQg+E2upsdIVVFFBUz3osUujS8w==
+hardhat-openzeppelin-defender@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/hardhat-openzeppelin-defender/-/hardhat-openzeppelin-defender-1.1.0.tgz#2b91599b4b11495b1ae8c006beb34e83752c45de"
+  integrity sha512-Rtf56qJPgM80jx7j3aWoON3VDb/NCd/4KP6mbDYnE+GAxCDwA+Ik7Rwue3JFlvmvfe7elh8GQQYc0R8IodZA8Q==
   dependencies:
-    defender-admin-client "^1.27.0"
-    defender-autotask-client "^1.27.0"
+    defender-admin-client "^1.27.1"
+    defender-autotask-client "^1.27.1"
     defender-autotask-utils "^1.25.0"
-    defender-kvstore-client "^1.27.0"
-    defender-relay-client "^1.27.0"
-    defender-sentinel-client "^1.27.0"
+    defender-kvstore-client "^1.27.1"
+    defender-relay-client "^1.27.1"
+    defender-sentinel-client "^1.27.1"
 
 hardhat@^2.10.1:
   version "2.10.1"
