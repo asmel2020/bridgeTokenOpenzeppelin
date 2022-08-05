@@ -9,7 +9,7 @@ sistema construido sobre la infraestructura de oppenzepelin defender para facili
 
 `$ npm install`
 
-#variables de entorno
+# variables de entorno
 
 introduzca las siguiente variables de entrono para que el sistema corra de forma correcta
 
