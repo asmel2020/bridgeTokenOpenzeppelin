@@ -18,6 +18,7 @@
     "relay:Avax": "yarn hardhat run scripts/openzeppelinDefender/relay/walletAvax.ts",
     "sentinel:sentinelBsc": "yarn hardhat run scripts/openzeppelinDefender/sentinel/sentinelBsc.ts",
     "sentinel:sentinelAvax": "yarn hardhat run scripts/openzeppelinDefender/sentinel/sentinelAvax.ts",
+    "proposal": "yarn hardhat run scripts/openzeppelinDefender/proposal/proposal.ts",
     "deploy:brigeBsc": "yarn hardhat run scripts/deploy/BrigeToken.ts --network bscTestnet",
     "deploy:brigeAvax": "yarn hardhat run scripts/deploy/BrigeToken.ts --network avalancheTestnet",
     "deploy:Token": "yarn hardhat run scripts/deploy/MyToken.ts --network bscTestnet",
@@ -25,12 +26,12 @@
     "deploy:TokenAll": "yarn deploy:Token && yarn deploy:WToken",
     "relay:all": "yarn relay:Bsc && yarn relay:Avax",
     "deploy:brigeAll": "yarn deploy:brigeBsc && yarn deploy:brigeAvax",
-    "autoTask:all": "yarn autoTask:brigeOracle && yarn autoTask:balaceVerify & yarn autoTask:pause-custodial-blockchain-1 && yarn autoTask:pause-custodial-blockchain-2 && yarn autoTask:unpause-custodial-blockchain-1 && yarn autoTask:unpause-custodial-blockchain-2 && yarn autoTask:inyectSecret",
+    "autoTask:all": "yarn autoTask:brigeOracle && yarn autoTask:pause-custodial-blockchain-1 && yarn autoTask:pause-custodial-blockchain-2 && yarn autoTask:unpause-custodial-blockchain-1 && yarn autoTask:unpause-custodial-blockchain-2 && yarn autoTask:inyectSecret && yarn autoTask:balaceVerify",
     "sentinel:all": "yarn sentinel:sentinelBsc && yarn sentinel:sentinelAvax",
-    "deploy:allSystem": "yarn relay:all && yarn deploy:brigeAll && yarn deploy:TokenAll  && yarn autoTask:all && yarn sentinel:all && yarn runAutoTask:inyectSecret"
+    "deploy:allSystem": "yarn relay:all && yarn deploy:brigeAll && yarn deploy:TokenAll  && yarn autoTask:all && yarn runAutoTask:inyectSecret && yarn sentinel:all && yarn proposal"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Danny Jesus Gonzalez Galicia",
+  "license": "MIT",
   "devDependencies": {
     "@ethersproject/abi": "^5.6.4",
     "@ethersproject/providers": "^5.6.8",
@@ -48,7 +49,7 @@
     "hardhat": "^2.10.1",
     "hardhat-abi-exporter": "^2.10.0",
     "hardhat-gas-reporter": "^1.0.8",
-    "hardhat-openzeppelin-defender": "^1.0.6",
+    "hardhat-openzeppelin-defender": "^1.1.0",
     "i": "^0.3.7",
     "npm": "^8.15.1",
     "solidity-coverage": "^0.7.21",

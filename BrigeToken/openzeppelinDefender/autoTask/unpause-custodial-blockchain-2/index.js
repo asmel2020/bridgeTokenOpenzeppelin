@@ -1,4 +1,5 @@
 const { DefenderRelayProvider,DefenderRelaySigner } = require("defender-relay-client/lib/ethers");
+const { KeyValueStoreClient } = require("defender-kvstore-client");
 const ethers = require("ethers");
 const abi = ['function unpause()'];
 

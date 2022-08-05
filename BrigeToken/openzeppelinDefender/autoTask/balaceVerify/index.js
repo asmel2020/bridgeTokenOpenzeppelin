@@ -22,7 +22,7 @@ exports.handler = async function (event) {
 
   const providerOrigen = new DefenderRelayProvider(credentialsOrigen);
   const OrigenErc20 = new ethers.Contract(
-    await store.get("originalToken"),
+    await store.get("originalTokenAddress"),
     abi,
     providerOrigen
   );
@@ -36,7 +36,7 @@ exports.handler = async function (event) {
   };
   const providerWrapper = new DefenderRelayProvider(credentialsWrapper);
   const WrapperErc20 = new ethers.Contract(
-    await store.get("WrapeToken"),
+    await store.get("WrapeTokenAddress"),
     abi,
     providerWrapper
   );

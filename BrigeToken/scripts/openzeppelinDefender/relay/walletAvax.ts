@@ -14,16 +14,16 @@ async function main() {
     network: "fuji",
     minBalance: BigInt(1e18).toString(),
   };
-  const RelayerGetResponse = await OpenzeppelinDefender.RelayClient.create(
+  const {relayerId,address}:any = await OpenzeppelinDefender.RelayClient.create(
     requestParameters
   );
-  const { apiKey, secretKey, relayerId, keyId }: any =
+  const {apiKey, secretKey,  keyId } =
     await OpenzeppelinDefender.RelayClient.createKey(
-      RelayerGetResponse.relayerId
+      relayerId
     );
 
   credencialRelay.AvaxRelay = {
-    address: RelayerGetResponse.address,
+    address,
     apiKey,
     secretKey,
     relayerId,
@@ -37,7 +37,7 @@ async function main() {
   await OpenzeppelinDefender.KvstoreClient.put("apiKeyBlockchain_2", apiKey);
   await OpenzeppelinDefender.KvstoreClient.put(
     "apiSecretBlockchain_2",
-    secretKey
+    secretKey || ''
   );
 }
 
