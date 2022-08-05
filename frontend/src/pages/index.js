@@ -13,7 +13,7 @@ const IndexPage = () => {
   const [toNetwork, setToNetwork] = useState("AVAX");
   const [symbol, setSymbol] = useState("");
   const [botton, setBotton] = useState("");
-  const [amount, setAmount] = useState(0);
+  const [inputAmount, setInputAmount] = useState("");
   const [signer, setSigner] = useState();
   const [chainId, setChainId] = useState();
   const [balance, setBalance] = useState();
@@ -107,16 +107,16 @@ const IndexPage = () => {
       const erc20 = new ethers.Contract(tokenOrigina, abis, signer);
       await erc20.approve(
         custodiaOrigina,
-        ethers.utils.parseUnits(amount.toString(), "ether")
+        ethers.utils.parseUnits(inputAmount.toString(), "ether")
       );
-      erc20.wait(4);
+      setAllowance(true);
     } else if (chainId === "0xa869") {
       const erc20 = new ethers.Contract(tokenWrapper, abis, signer);
       await erc20.approve(
         custodiaOrigina,
-        ethers.utils.parseUnits(amount.toString(), "ether")
+        ethers.utils.parseUnits(inputAmount.toString(), "ether")
       );
-      erc20.wait(4);
+      setAllowance(true);
     } else {
       setCustomAlert("flex");
       setAlertMessage("Blockchain no permitida, por favor cambie de red");
@@ -126,10 +126,10 @@ const IndexPage = () => {
   async function postBrige() {
     if (chainId === "0x61") { // BSC
       const custodia = new ethers.Contract(custodiaOrigina, abis, signer);
-      await custodia.brige(amount, ethers.utils.parseUnits(amount, "ether"));
+      await custodia.brige(inputAmount, ethers.utils.parseUnits(inputAmount, "ether"));
     } else if (chainId === "0xa869") { // FUJI
       const custodia = new ethers.Contract(custodiaWrapper, abis, signer);
-      await custodia.brige(amount, ethers.utils.parseUnits(amount, "ether"));
+      await custodia.brige(inputAmount, ethers.utils.parseUnits(inputAmount, "ether"));
     } else {
       setCustomAlert("flex");
       setAlertMessage("Blockchain no permitida, por favor cambie de red");
@@ -156,8 +156,8 @@ const IndexPage = () => {
         <button
           disabled={!disabled}
           type="submit"
-          onClick={() => {
-            postBrige(amount);
+          onClick={(e) => {
+            postBrige(e);
           }}
         >
           Call Contract
@@ -168,9 +168,7 @@ const IndexPage = () => {
         <button
           disabled={!disabled}
           type="submit"
-          onClick={() => {
-            approve();
-          }}
+          onClick={(e) => approve(e)}
         >
           Approve
         </button>
@@ -213,6 +211,20 @@ const IndexPage = () => {
     setCustomAlert("none");
   }
 
+  const handleChange = e => {
+    setInputAmount(e.target.value);
+  }
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    if(allowance){
+      postBrige();
+    } else {
+      approve();
+    }
+
+  }
+
   return (
     <main>
       <div className="container">
@@ -231,33 +243,22 @@ const IndexPage = () => {
           >
             Connect Wallet
           </button>
-          <form>
+          <form onSubmit={handleSubmit}>
             <label name="networksForm">from:</label>
             <p>{fromNetwork}</p>
             <label>to:</label>
             <p>{toNetwork}</p>
-          </form>
-          <input
+            <input
             disabled={!disabled}
             min="0"
             type="number"
             placeholder="Amount"
-            onChange={(e) => {
-              setAmount(e.target.value)
-              console.log(amount)
-            }}
+            value={inputAmount}
+            onChange={handleChange}
           />
-          <p id="balance">Balance: {balance} {symbol} </p>
-          {botton}
-           {/* <button
-          disabled={!disabled}
-          type="submit"
-          onClick={() => {
-            postBrige();
-          }}
-        >
-          Call Contract
-        </button> */}
+            <p id="balance">Balance: {balance} {symbol} </p>
+            <button disabled={!disabled} type="submit" >{allowance ? "Call Contract" : "Approve"}</button>
+          </form>
       
         </div>
       </div>
