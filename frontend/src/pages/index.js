@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ethers} from "ethers";
+import { ethers } from "ethers";
 import detectEthereumProvider from "@metamask/detect-provider";
 // import { ethers } from "ethers";
 import "../style.css";
@@ -38,7 +38,7 @@ const IndexPage = () => {
       return provider;
     } else {
       setCustomAlert("flex");
-      setAlertMessage("Please install MetaMask!")
+      setAlertMessage("Please install MetaMask!");
     }
   }
 
@@ -55,14 +55,14 @@ const IndexPage = () => {
       const erc20 = new ethers.Contract(tokenOrigina, abis, signer);
       setSymbol("tBNB");
       setFromNetwork("BSC");
-      setToNetwork("AVAX")
+      setToNetwork("AVAX");
       return ethers.utils.formatEther(
         await erc20.balanceOf(signer.getAddress())
       );
     } else if (chainId === "0xa869") {
       setSymbol("AVAX");
       setFromNetwork("AVAX");
-      setToNetwork("BSC")
+      setToNetwork("BSC");
       const erc20 = new ethers.Contract(tokenWrapper, abis, signer);
       return ethers.utils.formatEther(
         await erc20.balanceOf(signer.getAddress())
@@ -74,11 +74,16 @@ const IndexPage = () => {
 
   async function consultAllowance(signer) {
     if (chainId === "0x61") {
-      const erc20 = new ethers.Contract(tokenOrigina, abis, signer);
-      const result = await erc20.allowance(
-        custodiaOrigina,
-        signer.getAddress()
+      const erc20 = new ethers.Contract(
+        "0x3Ef32B1E5B8b2fF43DEEec56A05C079DDa239BF9",
+        abis,
+        signer
       );
+      const result = await erc20.allowance(
+        signer.getAddress(),
+        custodiaOrigina
+      );
+      console.log(result);
       if (result.lt("1000000000000000000")) {
         setAllowance(false);
       } else {
@@ -87,8 +92,8 @@ const IndexPage = () => {
     } else if (chainId === "0xa869") {
       const erc20 = new ethers.Contract(tokenWrapper, abis, signer);
       const result = await erc20.allowance(
-        custodiaWrapper,
-        signer.getAddress()
+        signer.getAddress(),
+        custodiaWrapper
       );
 
       if (result.lt("1000000000000000000")) {
@@ -105,17 +110,19 @@ const IndexPage = () => {
   async function approve() {
     if (chainId === "0x61") {
       const erc20 = new ethers.Contract(tokenOrigina, abis, signer);
-      await erc20.approve(
+      const result= await erc20.approve(
         custodiaOrigina,
-        ethers.utils.parseUnits(inputAmount.toString(), "ether")
+        ethers.utils.parseUnits("10000000000000000000000000000000", "ether")
       );
+      result.wait(4)
       setAllowance(true);
     } else if (chainId === "0xa869") {
       const erc20 = new ethers.Contract(tokenWrapper, abis, signer);
-      await erc20.approve(
+      const result=await erc20.approve(
         custodiaOrigina,
-        ethers.utils.parseUnits(inputAmount.toString(), "ether")
+        ethers.utils.parseUnits("10000000000000000000000000000000", "ether")
       );
+      result.wait(4)
       setAllowance(true);
     } else {
       setCustomAlert("flex");
@@ -124,12 +131,14 @@ const IndexPage = () => {
   }
 
   async function postBrige() {
-    if (chainId === "0x61") { // BSC
+    if (chainId === "0x61") {
+      // BSC
       const custodia = new ethers.Contract(custodiaOrigina, abis, signer);
-      await custodia.brige(inputAmount, ethers.utils.parseUnits(inputAmount, "ether"));
-    } else if (chainId === "0xa869") { // FUJI
+      await custodia.brige("1", ethers.utils.parseUnits(inputAmount, "ether"));
+    } else if (chainId === "0xa869") {
+      // FUJI
       const custodia = new ethers.Contract(custodiaWrapper, abis, signer);
-      await custodia.brige(inputAmount, ethers.utils.parseUnits(inputAmount, "ether"));
+      await custodia.brige("1", ethers.utils.parseUnits(inputAmount, "ether"));
     } else {
       setCustomAlert("flex");
       setAlertMessage("Blockchain no permitida, por favor cambie de red");
@@ -148,10 +157,17 @@ const IndexPage = () => {
     const signer = provider.getSigner();
 
     setSigner(signer);
+    await bottons();
   }
 
   async function bottons() {
     if (allowance) {
+      setBotton(
+        <button disabled={!disabled} type="submit" onClick={(e) => approve(e)}>
+          Approve
+        </button>
+      );
+    } else {
       setBotton(
         <button
           disabled={!disabled}
@@ -161,16 +177,6 @@ const IndexPage = () => {
           }}
         >
           Call Contract
-        </button>
-      );
-    }else{
-      setBotton(
-        <button
-          disabled={!disabled}
-          type="submit"
-          onClick={(e) => approve(e)}
-        >
-          Approve
         </button>
       );
     }
@@ -207,31 +213,28 @@ const IndexPage = () => {
     detectMetamask();
   }, []);
 
-  const dismissAlert = ()=> {
+  const dismissAlert = () => {
     setCustomAlert("none");
-  }
+  };
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setInputAmount(e.target.value);
-  }
+  };
 
-  const handleSubmit = e => {
-    e.preventDefault()
-    if(allowance){
-      postBrige();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (allowance) {
+      await postBrige();
     } else {
-      approve();
+      await approve();
     }
-
-  }
+  };
 
   return (
     <main>
       <div className="container">
         <div className="brand-logo"></div>
-        <div className="brand-title">
-          Blockdemy Token Bridge
-        </div>
+        <div className="brand-title">Blockdemy Token Bridge</div>
         <div className="inputs">
           <button
             disabled={disabled}
@@ -249,23 +252,28 @@ const IndexPage = () => {
             <label>to:</label>
             <p>{toNetwork}</p>
             <input
-            disabled={!disabled}
-            min="0"
-            type="number"
-            placeholder="Amount"
-            value={inputAmount}
-            onChange={handleChange}
-          />
-            <p id="balance">Balance: {balance} {symbol} </p>
-            <button disabled={!disabled} type="submit" >{allowance ? "Call Contract" : "Approve"}</button>
+              disabled={!disabled}
+              min="0"
+              type="number"
+              placeholder="Amount"
+              value={inputAmount}
+              onChange={handleChange}
+            />
+            <p id="balance">
+              Balance: {balance} {}{" "}
+            </p>
+            <button disabled={!disabled} type="submit">
+              {allowance ? "Call Contract" : "Approve"}
+            </button>
           </form>
-      
         </div>
       </div>
-      <div id="alert_container" style={{"display": `${customAlert}`}}>
+      <div id="alert_container" style={{ display: `${customAlert}` }}>
         <div id="alert">
           <p id="alert_text">{alertMessage}</p>
-          <button id="alert_button" onClick={() => dismissAlert()}>OK</button>
+          <button id="alert_button" onClick={() => dismissAlert()}>
+            OK
+          </button>
         </div>
       </div>
     </main>
