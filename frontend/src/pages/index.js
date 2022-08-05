@@ -32,12 +32,13 @@ const IndexPage = () => {
   );
 
   
-    async function detecteMesage(){
+  async function detecteMesage(){
       window.ethereum.on('message', (s)=>{
         console.log(s)
 
       });
-    }
+  }
+  
   async function detectMetamask() {
     const provider = await detectEthereumProvider();
 
@@ -90,9 +91,9 @@ const IndexPage = () => {
       );
      
       if (result.lt("1")) {
-        setAllowance(true);
-      } else {
         setAllowance(false);
+      } else {
+        setAllowance(true);
       }
 
     } else if (chainId === "0xa869") {
@@ -103,9 +104,9 @@ const IndexPage = () => {
       );
 
       if (result.lt("1")) {
-        setAllowance(true);
-      } else {
         setAllowance(false);
+      } else {
+        setAllowance(true);
       }
 
     } else {
@@ -174,10 +175,10 @@ const IndexPage = () => {
           disabled={!disabled}
           type="submit"
           onClick={() => {
-            postBrige(amount);
+            approve();
           }}
         >
-          Call Contract
+          Approve
         </button>
       );
     }else{
@@ -186,10 +187,10 @@ const IndexPage = () => {
           disabled={!disabled}
           type="submit"
           onClick={() => {
-            approve();
+            postBrige(amount);
           }}
         >
-          Approve
+          Call Contract
         </button>
       );
       
